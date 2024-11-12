@@ -54,7 +54,7 @@ function drawPatternNAZI() {
     ctx.stroke();
     
     ctx.restore();
-    angle += 0.5;
+    angle += 0.2;
     requestAnimationFrame(drawPatternNAZI);
 }
 
