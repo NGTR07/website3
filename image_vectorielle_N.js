@@ -46,7 +46,7 @@ function drawPatternWithPNG() {
     
     // Dessiner l'image PNG au centre
     var png = new Image();
-    png.src = "C:/Users/nicog/Documents/UGA/BUT - SD/2A/Projet_serveur/python_N.png";
+    png.src = "https://raw.githubusercontent.com/ngtr07/website3/main/python_N.png";
     ctx.drawImage(png, (image.width - 200) / 2, (image.height - 200) / 2, 200, 200);
     
     ctx.restore();
