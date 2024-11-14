@@ -56,10 +56,10 @@ function drawPatternWithPNG() {
 
 function decreaseSpeed() {
     if (rotationSpeed > 0.001) {
-        rotationSpeed -= 0.01;
+        rotationSpeed -= 0.02;
     }
 }
 
 function increaseSpeed() {
-    rotationSpeed += 0.01;
+    rotationSpeed += 0.02;
 }
