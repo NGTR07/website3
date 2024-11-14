@@ -1,63 +1,65 @@
 var image = document.getElementById("MonDessin");
 var ctx = image.getContext("2d");
 
-// stroke -> contour du rectangle
-ctx.strokeStyle ="red";
-ctx.strokeRect(80, 20, 50, 50);
+// Définir la taille du canvas en fonction de la taille de l'écran
+image.width = window.innerWidth * 0.8;
+image.height = window.innerHeight * 0.7;
 
 // Pour un rectangle rempli
 ctx.fillStyle = "red";
-ctx.fillRect(150, 100, 700, 400);
+ctx.fillRect(0, 0, image.width, image.height);
 
 let angle = 0;
-function drawPatternNAZI() {
+let rotationSpeed = 0.01;
+
+function drawPatternWithPNG() {
     ctx.save();
+    
+    // Effacer le canvas
+    ctx.clearRect(0, 0, image.width, image.height);
+    
+    // Dessiner le rectangle rouge de fond
+    ctx.fillStyle = "red";
+    ctx.fillRect(0, 0, image.width, image.height);
     
     // Créer un masque circulaire pour le clearRect
     ctx.beginPath();
-    ctx.arc(500, 300, 170, 0, 2 * Math.PI);
+    ctx.arc(image.width / 2, image.height / 2, 170, 0, 2 * Math.PI);
     ctx.clip();
     
     // Effacer uniquement la zone circulaire
-    ctx.clearRect(330, 130, 340, 340);
+    ctx.clearRect((image.width - 700) / 2, (image.height - 400) / 2, 700, 400);
     
     ctx.restore();
     
     // Sauvegarder et configurer la rotation
     ctx.save();
-    ctx.translate(500, 300);
+    ctx.translate(image.width / 2, image.height / 2);
     ctx.rotate(angle);
-    ctx.translate(-500, -300);
+    ctx.translate(-(image.width / 2), -(image.height / 2));
     
     // Dessiner le cercle blanc
     ctx.beginPath();
     ctx.fillStyle = "white";
-    ctx.arc(500, 300, 170, 0, 2 * Math.PI);
+    ctx.arc(image.width / 2, image.height / 2, 170, 0, 2 * Math.PI);
     ctx.fill();
     
-    // Dessiner le motif de lignes
-    ctx.beginPath();
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 30;
-    ctx.moveTo(500, 300);
-    ctx.lineTo(500, 200);
-    ctx.lineTo(600, 200);
-    ctx.moveTo(500, 300);
-    ctx.lineTo(600, 300);
-    ctx.lineTo(600, 400);
-    ctx.moveTo(500, 300);
-    ctx.lineTo(500, 400);
-    ctx.lineTo(400, 400);
-    ctx.moveTo(500, 300);
-    ctx.lineTo(400, 300);
-    ctx.lineTo(400, 200);
-    ctx.stroke();
+    // Dessiner l'image PNG au centre
+    var png = new Image();
+    png.src = "C:/Users/nicog/Documents/UGA/BUT - SD/2A/Projet_serveur/python_N.png";
+    ctx.drawImage(png, (image.width - 200) / 2, (image.height - 200) / 2, 200, 200);
     
     ctx.restore();
-    angle += 0.1;
-    requestAnimationFrame(drawPatternNAZI);
+    angle += rotationSpeed;
+    requestAnimationFrame(drawPatternWithPNG);
 }
 
+function decreaseSpeed() {
+    if (rotationSpeed > 0.001) {
+        rotationSpeed -= 0.01;
+    }
+}
 
-// Démarrer l'animation
-drawPatternNAZI();
+function increaseSpeed() {
+    rotationSpeed += 0.01;
+}
