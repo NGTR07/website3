@@ -1,16 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Création de graphique et image</title>
-    <script src="Math.js"></script>
-    <script src="image_vectorielle_N.js" async></script>
-    <!--<script src="script1.js" async></script>-->
-
+    <title>Python Animation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        
+        #question {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        
+        #buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .btn-yes {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .btn-no {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        #canvas-container {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+        
+        canvas {
+            max-width: 80%;
+            max-height: 70%;
+            border: 1px solid black;
+        }
+        
+        #speed-controls {
+            display: none;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        #speed-controls button {
+            font-size: 16px;
+            padding: 5px 10px;
+            margin: 0 10px;
+        }
+    </style>
 </head>
 <body>
-    <canvas id="MonDessin" width="1500" height="1500"></canvas> 
+    <div id="question">Est-ce que tu suces le python ?</div>
+    <div id="buttons">
+        <button class="btn btn-yes">Oui</button>
+        <button class="btn btn-no">Non</button>
+    </div>
+    <div id="canvas-container">
+        <canvas id="MonDessin"></canvas>
+        <div id="speed-controls">
+            <button id="decrease-speed">-</button>
+            <button id="increase-speed">+</button>
+        </div>
+    </div>
+
+    <script src="image_vectorielle_N.js"></script>
+    <script>
+        const yesBtn = document.querySelector('.btn-yes');
+        const canvasContainer = document.getElementById('canvas-container');
+        const speedControls = document.getElementById('speed-controls');
+        const decreaseSpeedBtn = document.getElementById('decrease-speed');
+        const increaseSpeedBtn = document.getElementById('increase-speed');
+
+        yesBtn.addEventListener('click', () => {
+            document.getElementById('question').style.display = 'none';
+            document.getElementById('buttons').style.display = 'none';
+            canvasContainer.style.display = 'flex';
+            speedControls.style.display = 'flex';
+            drawPatternWithPNG();
+        });
+
+        decreaseSpeedBtn.addEventListener('click', () => {
+            decreaseSpeed();
+        });
+
+        increaseSpeedBtn.addEventListener('click', () => {
+            increaseSpeed();
+        });
+    </script>
 </body>
 </html>
-
